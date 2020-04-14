@@ -2,6 +2,7 @@ import urllib.request
 import os
 
 stockLabel = input("Enter Stock Label: ").upper()
+os.system('cls' if os.name == 'nt' else 'clear')
 while True:
 	page = urllib.request.urlopen("http://www.finance.yahoo.com/quote/"+stockLabel)
 	pageText = page.read()
@@ -12,5 +13,4 @@ while True:
 	htmlLineWithPrice = find(decodedPageText, query)
 	#parse htmlLineWithPrice to only have price
 	stockPrice = htmlLineWithPrice.split(" ")[-1].split(">")[1].split("<")[0]
-	os.system('cls' if os.name == 'nt' else 'clear')
-	print(stockLabel + ':', stockPrice)
+	print('\r%s: %s' % (stockLabel,stockPrice), end = '\r')
