@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import urllib.request
 import csv
+import os
 
 stockLabel = input("Enter Stock Label: ").upper()
 page = urllib.request.urlopen("http://www.finance.yahoo.com/quote/"+stockLabel)
@@ -27,8 +28,12 @@ def getStockLabelHeader():
 
 def writeStockFile(label, price):
 	try:
-		stockLablFile = csv.writer(open('./csvFiles/' + stockLabel + ".csv", "a"))
-		stockLablFile.writerow([price])
+		try:
+			stockLabelFile = csv.writer(open('./csvFiles/' + stockLabel + ".csv", "a"))
+		except:
+			os.mkdir("./csvFiles")
+			stockLabelFile = csv.writer(open('./csvFiles/' + stockLabel + ".csv", "a"))
+		stockLabelFile.writerow([price])
 	except:
 		return -1
 	return 0

@@ -13,4 +13,5 @@ while True:
 	htmlLineWithPrice = find(decodedPageText, query)
 	#parse htmlLineWithPrice to only have price
 	stockPrice = htmlLineWithPrice.split(" ")[-1].split(">")[1].split("<")[0]
+	#graph with live update?
 	print('\r%s: %s' % (stockLabel,stockPrice), end = '\r')
