@@ -1,4 +1,6 @@
 import urllib.request
+from bs4 import BeautifulSoup
+
 stockLabel = input("Enter Stock Label: ").upper()
 page = urllib.request.urlopen("http://www.finance.yahoo.com/quote/"+stockLabel)
 pageText = page.read()
@@ -11,6 +13,6 @@ find = lambda sentence, qry: sentence[sentence.find(qry):sentence.find(qry)+97] 
 htmlLineWithPrice = find(decodedPageText, query)
 #parse htmlLineWithPrice to only have price
 stockPrice = ""
-with open(stockLabel + ".csv",'a') as outFile:
+with open("./csvFiles" + stockLabel + ".csv",'a') as outFile:
 	print(htmlLineWithPrice)
 	#outFile.write(stockPrice))
