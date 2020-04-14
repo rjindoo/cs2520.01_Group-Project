@@ -8,10 +8,10 @@ pageText = page.read()
 decodedPageText = pageText.decode("utf-8")
 #location = decodedPageText.find("<span class=")
 #print(decodedPageText[location:location + 97])
-query = "<span class="
+yahooQuery = "<span class="
 find = lambda sentence, qry: sentence[sentence.find(qry):sentence.find(qry)+97] if qry in sentence else -1
 
-htmlLineWithPrice = find(decodedPageText, query)
+htmlLineWithPrice = find(decodedPageText, yahooQuery)
 #parse htmlLineWithPrice to only have price
 stockPrice = htmlLineWithPrice.split(" ")[-1].split(">")[1].split("<")[0]
 
