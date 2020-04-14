@@ -13,7 +13,8 @@ find = lambda sentence, qry: sentence[sentence.find(qry):sentence.find(qry)+97] 
 
 htmlLineWithPrice = find(decodedPageText, query)
 #parse htmlLineWithPrice to only have price
-stockPrice = htmlLineWithPrice
+stockPrice = htmlLineWithPrice.split(" ")[-1].split(">")[1].split("<")[0]
+
 def getStockLabelHeader():
 	try:
 		with open('./csvFiles/averageStockFile' + '.csv', 'r') as readFile:
@@ -38,6 +39,7 @@ def main():
 		print("File write success.")
 	else:
 		print("File not written.")
+	
 
 if __name__ == '__main__':
 	main()
