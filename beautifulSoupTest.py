@@ -13,7 +13,7 @@ find = lambda sentence, qry: sentence[sentence.find(qry):sentence.find(qry)+97] 
 
 htmlLineWithPrice = find(decodedPageText, query)
 #parse htmlLineWithPrice to only have price
-stockPrice = ""
+stockPrice = htmlLineWithPrice
 def getStockLabelHeader():
 	try:
 		with open('./csvFiles/averageStockFile' + '.csv', 'r') as readFile:
@@ -23,13 +23,21 @@ def getStockLabelHeader():
 		stockLabelHeader = []
 	return stockLabelHeader
 
-#print(getStockLabelHeader())
 
 def writeStockFile(label, price):
-	stockLablFile = csv.writer(open(stockLabel + ".csv", "a"))
-	stockLablFile.writerow(["test","test1","test2"])
-	#with open("./csvFiles" + stockLabel + ".csv",'a') as outFile:
-	print(stockLabel,htmlLineWithPrice)
-		#outFile.write(stockPrice))
+	try:
+		stockLablFile = csv.writer(open('./csvFiles/' + stockLabel + ".csv", "a"))
+		stockLablFile.writerow([price])
+	except:
+		return -1
+	return 0
+def main():
+	#print(getStockLabelHeader())
+	
+	if writeStockFile(stockLabel, stockPrice) == 0:
+		print("File write success.")
+	else:
+		print("File not written.")
 
-writeStockFile(stockLabel, htmlLineWithPrice)
+if __name__ == '__main__':
+	main()
